@@ -8,7 +8,7 @@ USE PruebaBackendNeedzio;
 CREATE TABLE IF NOT EXISTS TypeDocument_TB (
     id INT NOT NULL AUTO_INCREMENT,
     NameTypeDocument VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
+     KEY (id)
 );
 
 

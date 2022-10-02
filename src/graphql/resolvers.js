@@ -1,24 +1,20 @@
-const db  = require('../db/mysql');
+const { models } = require('../libs/sequelize')
 
 const resolvers = {
     Query: {
         getAllTypeDocument_TB: async () => {
-            const [rows, fields] = await db.promise().query('SELECT * FROM TypeDocument_TB');
-            return rows;
+            return await models.TypeDocument.findAll();
         },
         getAllCountry_TB: async () => {
-            const [rows, fields] = await db.promise().query('SELECT * FROM Country_TB');
-            return rows;
+            return await models.Country.findAll();
         },
     },
     Mutation: {
         createTypeDocument_TB: async (root, args) => {
-            const [rows, fields] = await db.promise().query('INSERT INTO TypeDocument_TB (NameTypeDocument) VALUES (?)', [args.NameTypeDocument]);
-            return args;
+            return await models.TypeDocument.create(args);
         },
         createCountry_TB: async (root, args) => {
-            const [rows, fields] = await db.promise().query('INSERT INTO Country_TB (CountryCode, CountryName) VALUES (?, ?)', [args.CountryCode, args.CountryName]);
-            return args;
+            return await models.Country.create(args);
         }
     },
 };
