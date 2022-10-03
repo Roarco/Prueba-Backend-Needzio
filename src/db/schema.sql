@@ -110,3 +110,11 @@ INSERT INTO Country_TB (CountryCode, CountryName) VALUES ('1', 'Canada');
 INSERT INTO Country_TB (CountryCode, CountryName) VALUES ('52', 'Mexico');
 INSERT INTO Country_TB (CountryCode, CountryName) VALUES ('34', 'España');
 
+
+-- insert data in AppUser_TB
+INSERT INTO AppUser_TB (LastName, Name, username, password, email) VALUES ('Gomez', 'Juan', 'juan.gomez', '123456', 'juan@mail.com');
+
+
+-- join de appuser_tb con contactinfo_tb
+SELECT * FROM AppUser_TB
+INNER JOIN ContactInfo_TB ON AppUser_TB.id = ContactInfo_TB.UserID;

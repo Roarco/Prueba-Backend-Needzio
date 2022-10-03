@@ -11,7 +11,7 @@ const ContactInfoSchema = {
         autoIncrement: true,
         allowNull: false,
     },
-    UserID : {
+    UserID: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
