@@ -42,6 +42,7 @@ const ContactInfoSchema = {
     Phone: {
         type: DataTypes.STRING(20),
         allowNull: false,
+        unique: true,
     },
     CelPhone: {
         type: DataTypes.STRING(20),

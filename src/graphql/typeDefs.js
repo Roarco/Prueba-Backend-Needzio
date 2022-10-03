@@ -74,9 +74,9 @@ const typeDefs = gql`
     createAppUser_TB(
       LastName: String!
       Name: String!
-      isMilitar: Boolean
+      isMilitar: Boolean!
       TimeCreate: DateTime
-      isTemporal: Boolean
+      isTemporal: Boolean!
       userName: String!
       password: String!
       email: String!

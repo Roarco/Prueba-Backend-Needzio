@@ -12,10 +12,12 @@ const CountrySchema = {
     CountryCode: {
         type: DataTypes.STRING(4),
         allowNull: false,
+        unique: true,
     },
     CountryName: {
         type: DataTypes.STRING(100),
         allowNull: false,
+        unique: true,
     }
 }
 

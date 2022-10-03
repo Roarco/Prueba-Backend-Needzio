@@ -24,6 +24,7 @@ const UserDocumentSchema = {
     Document: {
         type: DataTypes.STRING(20),
         allowNull: false,
+        unique: true,
     },
     TypeDocumentID: {
         type: DataTypes.INTEGER,

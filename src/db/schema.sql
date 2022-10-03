@@ -1,29 +1,13 @@
---creamos un schema en mysql PruebaBackendNeedzio
 CREATE SCHEMA IF NOT EXISTS PruebaBackendNeedzio
 USE PruebaBackendNeedzio;
 
---creamos la tabla TypeDocument_TB con los siguientes campos
--- 1- id (primary key)
--- 2- NameTypeDocument (varchar 50)
+
 CREATE TABLE IF NOT EXISTS TypeDocument_TB (
     id INT NOT NULL AUTO_INCREMENT,
-    NameTypeDocument VARCHAR(50) NOT NULL,
+    NameTypeDocument VARCHAR(50) NOT NULL UNIQUE,
      KEY (id)
 );
 
-
---creamos la tabla AppUser_TB con los siguientes campos
--- 1- id (primary key)
--- 2- LastName (varchar 20)
--- 3- Name (varchar 20)
--- 4- isMiltar (bit)
--- 5- TimeCreate (datetime)
--- 6- isTemporal (bit)
--- 7- username (varchar 50)
--- 8- password (varchar 100)
--- 9- email (varchar 50)
--- 10- emailVerified (bit)
--- 11- verificationToken (varchar 100)
 
 CREATE TABLE IF NOT EXISTS AppUser_TB (
     id INT NOT NULL AUTO_INCREMENT,
@@ -32,37 +16,26 @@ CREATE TABLE IF NOT EXISTS AppUser_TB (
     isMiltar BIT,
     TimeCreate DATETIME NOT NULL,
     isTemporal BIT ,
-    username VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     emailVerified BIT ,
     verificationToken VARCHAR(100) ,
     PRIMARY KEY (id)
 );
 
---creamos la tabla Country_TB con los siguientes campos
--- 1- id (primary key)
--- 2- CountryCode (varchar 4)
--- 3- CountryName (varchar 100)
 
 CREATE TABLE IF NOT EXISTS Country_TB (
     id INT NOT NULL AUTO_INCREMENT,
-    CountryCode VARCHAR(4) NOT NULL,
-    CountryName VARCHAR(100) NOT NULL,
+    CountryCode VARCHAR(4) NOT NULL UNIQUE,
+    CountryName VARCHAR(100) NOT NULL UNIQUE,
     PRIMARY KEY (id)
 );
 
 
---creamos la tabla UserDocument_TB con los siguientes campos
--- 1- UserID int (foreign key)
--- 2- Document varchar 20 w
--- 3- TypeDocumentID int (foreign key)
--- 4- PlaceExpedition varchar 60
--- 5- DateExpedition datetime
-
 CREATE TABLE IF NOT EXISTS UserDocument_TB (
     UserID INT NOT NULL,
-    Document VARCHAR(20) NOT NULL,
+    Document VARCHAR(20) NOT NULL UNIQUE,
     TypeDocumentID INT NOT NULL,
     PlaceExpedition VARCHAR(60) NOT NULL,
     DateExpedition DATETIME NOT NULL,
@@ -71,16 +44,6 @@ CREATE TABLE IF NOT EXISTS UserDocument_TB (
     FOREIGN KEY (TypeDocumentID) REFERENCES TypeDocument_TB(id)
 );
 
---creamos la tabla ContactInfo_TB con los siguientes campos
--- 1- id (primary key)
--- 2- UserID int (foreign key)
--- 3- Address varchar 60 w-#N°
--- 4- CountryID int (foreign key)
--- 5- City varchar 50
--- 6- Phone varchar 20 -d
--- 7- CelPhone varchar 20 -d
--- 9- EmergencyName varchar 100
--- 10- EmergencyPhone varchar 20
 
 CREATE TABLE IF NOT EXISTS ContactInfo_TB (
     id INT NOT NULL AUTO_INCREMENT,
@@ -88,7 +51,7 @@ CREATE TABLE IF NOT EXISTS ContactInfo_TB (
     Address VARCHAR(60) NOT NULL,
     CountryID INT NOT NULL,
     City VARCHAR(50) NOT NULL,
-    Phone VARCHAR(20) NOT NULL,
+    Phone VARCHAR(20) NOT NULL UNIQUE,
     CelPhone VARCHAR(20) NOT NULL,
     EmergencyName VARCHAR(100) NOT NULL,
     EmergencyPhone VARCHAR(20) NOT NULL,
@@ -100,9 +63,8 @@ CREATE TABLE IF NOT EXISTS ContactInfo_TB (
 
 -- insert data in TypeDocument_TB
 INSERT INTO TypeDocument_TB (NameTypeDocument) VALUES ('Cedula de Ciudadania');
-INSERT INTO TypeDocument_TB (NameTypeDocument) VALUES ('Cedula de Extranjeria');
+INSERT INTO TypeDocument_TB (NameTypeDocument) VALUES ('Cedula Extranjera');
 INSERT INTO TypeDocument_TB (NameTypeDocument) VALUES ('Pasaporte');
-INSERT INTO TypeDocument_TB (NameTypeDocument) VALUES ('Tarjeta de Identidad');
 
 -- insert data in Country_TB
 INSERT INTO Country_TB (CountryCode, CountryName) VALUES ('57', 'Colombia');
@@ -110,11 +72,3 @@ INSERT INTO Country_TB (CountryCode, CountryName) VALUES ('1', 'Canada');
 INSERT INTO Country_TB (CountryCode, CountryName) VALUES ('52', 'Mexico');
 INSERT INTO Country_TB (CountryCode, CountryName) VALUES ('34', 'España');
 
-
--- insert data in AppUser_TB
-INSERT INTO AppUser_TB (LastName, Name, username, password, email) VALUES ('Gomez', 'Juan', 'juan.gomez', '123456', 'juan@mail.com');
-
-
--- join de appuser_tb con contactinfo_tb
-SELECT * FROM AppUser_TB
-INNER JOIN ContactInfo_TB ON AppUser_TB.id = ContactInfo_TB.UserID;
