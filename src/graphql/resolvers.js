@@ -139,6 +139,57 @@ const resolvers = {
             return await contactInfo.update(args);
         },
 
+        deleteTypeDocument_TB: async (root, args) => {
+            const typeDocument = await models.TypeDocument.findByPk(args.id);
+
+            if (!typeDocument) {
+                throw new Error("TypeDocument not found");
+            }
+
+            return await typeDocument.destroy();
+        },
+
+        deleteCountry_TB: async (root, args) => {
+            const country = await models.Country.findByPk(args.id);
+
+            if (!country) {
+                throw new Error("Country not found");
+            }
+
+            return await country.destroy();
+        },
+
+        deleteAppUser_TB: async (root, args) => {
+            const appUser = await models.AppUser.findByPk(args.id);
+
+            if (!appUser) {
+                throw new Error("AppUser not found");
+            }
+
+            return await appUser.destroy();
+        },
+
+        deleteUserDocument_TB: async (root, args) => {
+            const userDocument = await models.UserDocument.findByPk(args.id);
+
+            if (!userDocument) {
+                throw new Error("UserDocument not found");
+            }
+
+            return await userDocument.destroy();
+        },
+
+        deleteContactInfo_TB: async (root, args) => {
+            const contactInfo = await models.ContactInfo.findByPk(args.id);
+
+            if (!contactInfo) {
+                throw new Error("ContactInfo not found");
+            }
+
+            return await contactInfo.destroy();
+        },
+
+
     },
     DateTime: new GraphQLScalarType({
         name: "DateTime",

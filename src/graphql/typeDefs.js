@@ -131,6 +131,12 @@ const typeDefs = gql`
         EmergencyName: String
         EmergencyPhone: String
     ): ContactInfo_TB!
+
+    deleteTypeDocument_TB(id: ID!): TypeDocument_TB!
+    deleteCountry_TB(id: ID!): Country_TB!
+    deleteAppUser_TB(id: ID!): AppUser_TB!
+    deleteUserDocument_TB(id: ID!): UserDocument_TB!
+    deleteContactInfo_TB(id: ID!): ContactInfo_TB!
   }
 `;
 
