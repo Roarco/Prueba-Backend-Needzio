@@ -83,6 +83,62 @@ const resolvers = {
         createContactInfo_TB: async (root, args) => {
             return await models.ContactInfo.create(args);
         },
+
+        updateTypeDocument_TB: async (root, args) => {
+            const typeDocument = await models.TypeDocument.findByPk(args.id);
+
+            if (!typeDocument) {
+                throw new Error("TypeDocument not found");
+            }
+
+            return await typeDocument.update(args);
+        },
+
+        updateCountry_TB: async (root, args) => {
+            const country = await models.Country.findByPk(args.id);
+
+            if (!country) {
+                throw new Error("Country not found");
+            }
+
+            return await country.update(args);
+        },
+
+        updateAppUser_TB: async (root, args) => {
+            const appUser = await models.AppUser.findByPk(args.id);
+
+            if (!appUser) {
+                throw new Error("AppUser not found");
+            }
+
+            //validate password
+            if (args.password) {
+                args.password = await hashPassword(args.password);
+            }
+
+            return await appUser.update(args);
+        },
+
+        updateUserDocument_TB: async (root, args) => {
+            const userDocument = await models.UserDocument.findByPk(args.id);
+
+            if (!userDocument) {
+                throw new Error("UserDocument not found");
+            }
+
+            return await userDocument.update(args);
+        },
+
+        updateContactInfo_TB: async (root, args) => {
+            const contactInfo = await models.ContactInfo.findByPk(args.id);
+
+            if (!contactInfo) {
+                throw new Error("ContactInfo not found");
+            }
+
+            return await contactInfo.update(args);
+        },
+
     },
     DateTime: new GraphQLScalarType({
         name: "DateTime",
