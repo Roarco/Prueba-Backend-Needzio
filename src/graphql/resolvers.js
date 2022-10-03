@@ -1,6 +1,7 @@
 const { models } = require("../libs/sequelize");
 const { GraphQLScalarType } = require("graphql");
-const { hashPassword } = require("../libs/bcrypt");
+const { hashPassword, comparePassword } = require("../libs/bcrypt");
+const { generateToken } = require("../libs/jwt");
 
 const resolvers = {
     Query: {
@@ -189,6 +190,37 @@ const resolvers = {
             return await contactInfo.destroy();
         },
 
+        loginAppUser_TB: async (root, args) => {
+            const appUser = await models.AppUser.findOne({
+                where: { userName: args.userName },
+            });
+            if (!appUser) {
+                throw new Error("User not found");
+            }
+
+            const isValid = await comparePassword(args.password, appUser.password);
+            if (!isValid) {
+                throw new Error("Invalid password");
+            }
+
+            const payload = {
+                id: appUser.id,
+                userName: appUser.userName,
+                email: appUser.email,
+                LastName: appUser.LastName,
+                Name: appUser.Name,
+                isMilitar: appUser.isMilitar,
+                isTemporal: appUser.isTemporal,
+            };
+
+            const token = generateToken(payload);
+
+            await appUser.update({ emailVerified: true , verificationToken: token});
+
+            return {
+                token,
+            };
+        },
 
     },
     DateTime: new GraphQLScalarType({

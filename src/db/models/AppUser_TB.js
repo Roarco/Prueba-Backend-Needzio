@@ -43,7 +43,7 @@ const AppUserSchema = {
         type: DataTypes.BOOLEAN,
     },
     verificationToken: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(500),
     }
 }
 
