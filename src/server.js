@@ -7,6 +7,10 @@ const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 const path = require('path');
 
+const cors = require('cors');
+
+app.use(cors());
+
 app.get('*', express.static(path.join(__dirname, '../Public')));
 
 async function startServer() {
